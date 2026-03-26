@@ -40,7 +40,7 @@ class TimeCheker(ctk.CTk):
             
     
     def save_to_csv(self):
-        path = "/home/yuki/Desktop/Python/tools/comparison_tool/csv/time.csv"
+        path = "csv/time.csv"
         base_dir = os.path.dirname(os.path.abspath( __file__))
         file = os.path.isfile(path)
         os.path.join(base_dir, path)

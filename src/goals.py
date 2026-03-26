@@ -48,8 +48,6 @@ class Goals(ctk.CTk):
         self.goals.append(goal4)
         if self.csv_path is None:
             print("環境変数が機能していません")
-            self.csv_path = "/home/yuki/Desktop/Python/tools/comparison_tool/csv"
-            full_path = os.path.join(self.csv_path, self.csv_file)
         else:
             full_path = os.path.join(self.csv_path, self.csv_file)
             
