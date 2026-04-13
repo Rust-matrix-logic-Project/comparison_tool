@@ -1,12 +1,10 @@
 from datetime import datetime
 import os, json
 from dotenv import load_dotenv
-import customtkinter as ctk
 load_dotenv()
 
-class Goals(ctk.CTkFrame):
-    def __init__(self, master, **kwargs):
-         super().__init__(master, **kwargs)
+class Goals():
+    def __init__(self, date, goal, updated_at, states):
          self.year = datetime.now().strftime("%Y")
          self.month = datetime.now().strftime("%m")
          self.json_date = datetime.now().strftime("%Y-%m-%d")
@@ -14,23 +12,11 @@ class Goals(ctk.CTkFrame):
          self.date = datetime.now().strftime("%d")
          self.json_path = os.environ.get("STUDY_JSON_DIR")
          self.goals = {}
-         
-         self.pulldown = {'未着手': -1, '進行中': 0, '完了': 1}
-         self.button = ctk.CTkButton(self, text="登録", command=self.save)
-         self.option1 = ctk.CTkOptionMenu(self,values=['未着手', '進行中', '完了'])
-         self.update_button = ctk.CTkButton(self, text="更新", command=self.update)
 
-         self.option1.set('未着手')
-         self.option1.pack()
-
-         self.button.pack(pady=15)
-         self.update_button.pack(pady=10)
-         self.label = ctk.CTkLabel(self, text="")
-         self.label.pack(pady=40)
-         self.entry1 = ctk.CTkEntry(self)
-         self.entry1.pack(pady=10)
-         self.entry2 = ctk.CTkEntry(self)
-         self.entry2.pack(pady=10)
+         self.entry1 = date[0], goal[0]
+         self.entry2 = date[1], goal[1]
+         self.updated_at = updated_at
+         self.states = states
          
          
     def save(self):
@@ -39,11 +25,14 @@ class Goals(ctk.CTkFrame):
         entry = [self.entry1, self.entry2]
 
         for i in entry:
-            if i.get() == "":
+            if i[0] == "":
                 continue
+            if i[1] == "":
+                continue
+
             recode_id = str(uuid.uuid4())
             self.goals = {'key': recode_id,'created_at': self.json_date,"date": self.date, 
-                        'task': i.get(), "states": -1, "updated_at": None}
+                        'task': i[1], "states": -1, "updated_at": None}
 
             if self.json_path is None:
                 print("環境変数が機能していません")
@@ -84,7 +73,7 @@ class Goals(ctk.CTkFrame):
         serch_task = target[0]
         serch_date = self.json_date
 
-        val_a = self.pulldown[self.option1.get()]
+        val_a = self.states
 
         for i in update_data:
             if i['key'] == serch_task['key']:
