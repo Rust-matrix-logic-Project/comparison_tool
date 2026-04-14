@@ -1,13 +1,13 @@
 import fastapi
 import fastapi.middleware.cors
-import back.goals as goals, back.times as times
+import src.back.goals as goals, src.back.times as times
 
 app = fastapi.FastAPI()
 timer = times.TimeCheker()
 
 app.add_middleware(
     fastapi.middleware.cors.CORSMiddleware,
-    allow_origins=["https://localhost:5173"]
+    allow_origins=["http://localhost:5173"]
 )
 
 @app.get("/timer/start")

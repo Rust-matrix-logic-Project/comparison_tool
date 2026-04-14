@@ -28,7 +28,7 @@ class TimeCheker():
     def save_to_csv(self):
         year_month = datetime.now().strftime("%Y-%m")
         path = f"csv/time_{year_month}.csv"
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath( __file__)))
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath( __file__))))
         
         full_path = os.path.join(base_dir, path)
         file = os.path.isfile(full_path)
@@ -50,4 +50,5 @@ class TimeCheker():
             
             return str(self.total).split(".")[0]
         except:
+             print("エラー発生")
              return "csv保存に問題発生"
