@@ -14,7 +14,7 @@ let start = timer_start.addEventListener("click", ()=>{
     return;
 }
     console.log("記録開始"), fetch("http://localhost:8000/timer/start", {method:"GET"})
-    .then(res => res.json()).then(() => {const data = new Date(); timer.textContent = data.toLocaleTimeString();}),
+    .then(() => {const data = new Date(); timer.textContent = data.toLocaleTimeString();}),
     isTracking = !isTracking
 })
 

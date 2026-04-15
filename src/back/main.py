@@ -1,6 +1,7 @@
 import fastapi
 import fastapi.middleware.cors
 import src.back.goals as goals, src.back.times as times
+from typing import Annotated
 
 app = fastapi.FastAPI()
 timer = times.TimeCheker()
@@ -20,8 +21,8 @@ def timer_end():
     return result
 
 @app.post("/goals/save")
-def goals_set(date, goal, states):
-    goals.Goals(date, goal, states).save()
+def goals_set(goal:Annotated[list[str], fastapi.Form()], states: int):
+    goals.Goals(goal, states).save()
 
 @app.post("/goals/update")
 def goals_set(goal, updated_at, states):

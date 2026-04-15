@@ -4,36 +4,44 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Goals():
-    def __init__(self, date, goal, updated_at, states):
+    def __init__(self, goal, states):
          self.year = datetime.now().strftime("%Y")
          self.month = datetime.now().strftime("%m")
-         self.json_date = datetime.now().strftime("%Y-%m-%d")
          self.json_file = f"{self.year}_{self.month}_goals.jsonl"
          self.date = datetime.now().strftime("%d")
          self.json_path = os.environ.get("STUDY_JSON_DIR")
+         self.goal = goal
          self.goals = {}
-
-         self.entry1 = date[0], goal[0]
-         self.entry2 = date[1], goal[1]
-         self.updated_at = updated_at
          self.states = states
          
          
     def save(self):
         import uuid
-        
-        entry = [self.entry1, self.entry2]
+        entry = []
+        self.json_date = datetime.now().strftime("%Y-%m-%d")
+        goal = ",".join(self.goal).split(",")
+        print(goal)
+
+        if len(goal) > 0:
+            self.entry1 = (self.date, goal[0])
+            entry.append(self.entry1)
+        else:
+            self.entry1 = None
+        if len(goal) > 1:
+            self.entry2 = (self.date, goal[1])
+            entry.append(self.entry2)
+        else:
+            self.entry2 = None
 
         for i in entry:
-            if i[0] == "":
-                continue
-            if i[1] == "":
-                continue
-
             recode_id = str(uuid.uuid4())
+            print(i)
+            if i == "":
+                continue
+        
             self.goals = {'key': recode_id,'created_at': self.json_date,"date": self.date, 
-                        'task': i[1], "states": -1, "updated_at": None}
-
+                    'task': i[1], "states": -1, "updated_at": None}
+            
             if self.json_path is None:
                 print("環境変数が機能していません")
             else:
@@ -47,8 +55,11 @@ class Goals():
         serch_task = None
         serch_date = None
         update_data = []
+        self.updated_at = datetime.now()
+
         if self.json_path is None:
             print("環境変数が機能していません")
+            return
         else:
             full_path = os.path.join(self.json_path, self.json_file)
         
@@ -59,9 +70,7 @@ class Goals():
                 except:
                     continue
                 if file_data['states'] == -1 or file_data['states'] == 0:
-                    print(file_data)
                     update_data.append(file_data)
-                    print(update_data)
 
         target = []
         for i in update_data:
