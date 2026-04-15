@@ -21,9 +21,9 @@ def timer_end():
     return result
 
 @app.post("/goals/save")
-def goals_set(goal:Annotated[list[str], fastapi.Form()], states: int):
-    goals.Goals(goal, states).save()
+def goals_set(goal:Annotated[list[str], fastapi.Form()], status: int):
+    goals.Goals(goal, status).save()
 
 @app.post("/goals/update")
-def goals_set(goal, updated_at, states):
-    goals.Goals(goal, updated_at, states).update()
+def goals_set(goal, updated_at, status):
+    goals.Goals(goal, updated_at, status).update()

@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Goals():
-    def __init__(self, goal, states):
+    def __init__(self, goal, status):
          self.year = datetime.now().strftime("%Y")
          self.month = datetime.now().strftime("%m")
          self.json_file = f"{self.year}_{self.month}_goals.jsonl"
@@ -12,7 +12,7 @@ class Goals():
          self.json_path = os.environ.get("STUDY_JSON_DIR")
          self.goal = goal
          self.goals = {}
-         self.states = states
+         self.status = status
          
          
     def save(self):
@@ -33,6 +33,17 @@ class Goals():
         else:
             self.entry2 = None
 
+        if len(goal) > 2:
+            self.entry3 = (self.date, goal[2])
+            entry.append(self.entry3)
+        else:
+            self.entry3 = None
+        if len(goal) > 3:
+            self.entry4 = (self.date, goal[3])
+            entry.append(self.entry4)
+        else:
+            self.entry4 = None
+        
         for i in entry:
             recode_id = str(uuid.uuid4())
             print(i)
@@ -40,7 +51,7 @@ class Goals():
                 continue
         
             self.goals = {'key': recode_id,'created_at': self.json_date,"date": self.date, 
-                    'task': i[1], "states": -1, "updated_at": None}
+                    'task': i[1], "status": -1, "updated_at": None}
             
             if self.json_path is None:
                 print("環境変数が機能していません")
@@ -69,7 +80,7 @@ class Goals():
                     file_data = json.loads(data)
                 except:
                     continue
-                if file_data['states'] == -1 or file_data['states'] == 0:
+                if file_data['status'] == -1 or file_data['status'] == 0:
                     update_data.append(file_data)
 
         target = []
@@ -82,11 +93,11 @@ class Goals():
         serch_task = target[0]
         serch_date = self.json_date
 
-        val_a = self.states
+        val_a = self.status
 
         for i in update_data:
             if i['key'] == serch_task['key']:
-                i['states'] = val_a
+                i['status'] = val_a
                 if val_a == 1:
                     i['updated_at'] = serch_date
 
