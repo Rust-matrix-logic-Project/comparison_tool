@@ -13,7 +13,8 @@ app.add_middleware(
 
 @app.get("/timer/start")
 def timer_start():
-    timer.start_checker()
+    result = timer.start_checker()
+    return result
 
 @app.post("/timer/stop")
 def timer_end():
@@ -21,9 +22,16 @@ def timer_end():
     return result
 
 @app.post("/goals/save")
-def goals_set(goal:Annotated[list[str], fastapi.Form()]):
-    goals.Goals(goal, status=None).save()
+def goals_set(goal:Annotated[list[str], fastapi.Form()], month):
+    result = goals.Goals(goal, status=None, limit=None,month=month).save()
+    return result
 
 @app.post("/goals/update")
-def goals_set(goal, updated_at, status):
-    goals.Goals(goal, updated_at, status).update()
+def goals_update(key, status, limit, month):
+    result = goals.Goals(key=key, status=status, limit=limit, month=month).update()
+    return result
+
+@app.get("/goals/data")
+def get_goals(month):
+    result = goals.Goals(month=month).leard_to_jsonl()
+    return result
