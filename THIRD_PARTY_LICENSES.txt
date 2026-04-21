@@ -1,0 +1,105 @@
+THIRD-PARTY SOFTWARE LICENSES
+==============================
+
+This software includes the following third-party libraries.
+
+---
+
+## Python Dependencies
+
+---
+
+### FastAPI 0.128.0
+- License: MIT
+- Copyright: Copyright (c) Sebastián Ramírez
+- Homepage: https://github.com/fastapi/fastapi
+- SPDX: MIT
+
+---
+
+### Uvicorn 0.40.0
+- License: BSD-3-Clause
+- Copyright: Copyright (c) Tom Christie
+- Homepage: https://uvicorn.dev/
+- SPDX: BSD-3-Clause
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+---
+
+### python-dotenv 1.2.1
+- License: BSD-3-Clause
+- Copyright: Copyright (c) Saurabh Kumar
+- SPDX: BSD-3-Clause
+
+---
+
+### Pydantic 2.12.5
+- License: MIT
+- Copyright: Copyright (c) Samuel Colvin and contributors
+- Homepage: https://github.com/pydantic/pydantic
+- SPDX: MIT
+
+---
+
+### Starlette 0.47.3
+- License: BSD-3-Clause
+- Copyright: Copyright (c) Tom Christie
+- Homepage: https://github.com/encode/starlette
+- SPDX: BSD-3-Clause
+
+---
+
+## Node.js / Frontend Dependencies
+
+---
+
+### Electron 41.2.1
+- License: MIT
+- Copyright: Copyright (c) Electron contributors, Copyright (c) 2013-2020 GitHub Inc.
+- Homepage: https://www.electronjs.org/
+- SPDX: MIT
+
+---
+
+### TypeScript
+- License: Apache-2.0
+- Copyright: Copyright (c) Microsoft Corporation
+- Homepage: https://www.typescriptlang.org/
+- SPDX: Apache-2.0
+- Note: When distributing software that includes TypeScript-compiled output,
+  inclusion of a NOTICE file is recommended per Apache-2.0 requirements.
+
+---
+
+### Vite
+- License: MIT
+- Copyright: Copyright (c) 2019-present, VoidZero Inc. and Vite contributors
+- Homepage: https://vite.dev/
+- SPDX: MIT
+
+---
+
+### vite-plugin-electron-renderer 0.14.6
+- License: MIT
+- Copyright: Copyright (c) 2022-present, Alexey Schebelev
+- Homepage: https://github.com/electron-vite/vite-plugin-electron-renderer
+- SPDX: MIT
+
+---
+
+## Notes
+
+All third-party libraries listed above are used under their respective licenses.
+Commercial use, modification, and redistribution are permitted under MIT and BSD-3-Clause licenses.
+For Apache-2.0 (TypeScript), please refer to the official license text:
+https://spdx.org/licenses/Apache-2.0.html
