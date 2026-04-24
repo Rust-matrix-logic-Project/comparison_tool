@@ -12,11 +12,15 @@
 
 .header{
     display: flex;
-    align-items: center;
+    align-items: start;
     grid-column: 1 / 4;
     grid-row: 1 / 2;
-    background-color: thistle;
+    background-color: #3C3C3C;
+    color: #ccc;
     justify-content: center;
+    height: 25px;
+    margin: 0;
+    padding: 0;
 }
 
 .sidebar{
@@ -58,4 +62,9 @@
 .main-statis-bottom{
     height: 20%;
     border: 1px solid #ccc; 
+}
+
+body{
+    margin: 0;
+    padding: 0;
 }
