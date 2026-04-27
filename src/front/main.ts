@@ -1,21 +1,41 @@
 import './global.css';
-import {Footer, GraphArea, Header, MainArea, Sidebar} from './components/components.ts';
+import { Footer, GraphArea, Header, MainArea, Sidebar } from './components/components.ts';
 import { Timer } from './components/timer.ts';
-function App(){
-    const root = document.querySelector<HTMLDivElement>('#app-container');
-    const header = new Header('機能');
-    header.render();
-    const sidebar = new Sidebar('機能名')
-    sidebar.render()
-    const graphArea = new GraphArea('グラフ表示エリア')
-    graphArea.render()
-    const footer = new Footer('フッター')
-    footer.render()
-    const timer = new Timer()
-    const mainArea = new MainArea(timer.timer, timer.start_timer)
-    mainArea.render()
-    timer.render()
-    if(!root) return;
+import { Goals } from './components/goals.ts';
+
+function App() {
+    // Render order matches grid placement: header → sidebar → graph → footer → main-area content
+    const footer = new Footer();
+    const header = new Header('Timer');
+    header.render(footer);
+
+    const sidebar = new Sidebar();
+    const graphArea = new GraphArea();
+    graphArea.render();
+    footer.render();
+
+    const mainArea = new MainArea();
+    const timer = new Timer(footer);
+    const goals = new Goals(footer);
+
+    sidebar
+        .addFunction('タイマー', '⏱', () => {
+            mainArea.setContent(timer.container);
+            header.setFunctionName('Timer');
+            footer.log('Timerビューに切り替えました');
+        })
+        .addFunction('目標管理', '🎯', () => {
+            mainArea.setContent(goals.container);
+            header.setFunctionName('Goals');
+            footer.log('Goalsビューに切り替えました');
+        });
+
+    sidebar.render();
+
+    // Default view: Timer
+    mainArea.setContent(timer.container);
+    footer.log('アプリケーションを起動しました');
 }
+
 App();
 export default App;
