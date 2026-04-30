@@ -30,15 +30,15 @@ export class Header{
         const menu = new MenuBar()
         this.menubar?.appendChild(menu.build())
         if(this.menubar){
-        container?.append(this.header.appendChild(this.menubar));
+        this.header?.append(this.menubar);
         }
         if(this.functionName){
-        container?.append(this.header.appendChild(this.functionName));
+        this.header?.append(this.functionName);
         }
+        container?.append(this.header)  
     }
     
 };
-
 
 export class Sidebar{
     functionName: HTMLElement; 
