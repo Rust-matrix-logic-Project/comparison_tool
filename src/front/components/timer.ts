@@ -46,7 +46,7 @@ export class Timer{
         this.timer_click = 0
     }
     private _button_log(button: String){
-        const date = new Date().toLocaleString("en-US", {dateStyle:'full', timeStyle: 'short'})
+        const date = new Date().toLocaleString("en-US", {dateStyle:'full', timeStyle: 'short', hour12: false})
         if(this.button_log){
             this.button_log.scrollIntoView({
                 behavior: 'smooth',
