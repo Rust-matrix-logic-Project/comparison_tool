@@ -1,3 +1,4 @@
+import { StatisticalArea } from "./components";
 export class Timer{
     timer: HTMLElement;
     operation_area: HTMLElement;
@@ -7,8 +8,16 @@ export class Timer{
     low_area:HTMLElement;
     log_area: HTMLElement;
     button_log: HTMLElement;
+    csv_area: HTMLElement;
+    left_area: HTMLElement;
+    right_area: HTMLElement;
     
     constructor(){
+        this.left_area = document.createElement('div')
+        this.left_area.classList.add('left-area')
+        this.right_area = document.createElement('div')
+        this.right_area.classList.add('right-area')
+
         this.timer = document.createElement('div');
         this.timer.classList.add('timer');
         this.timer.id = 'timer'
@@ -20,6 +29,7 @@ export class Timer{
 
         this.log_area = document.createElement('div')
         this.log_area.classList.add('log-area')
+        this.log_area.style.flexDirection = 'column'
         
         this.operation_area = document.createElement('div')
         this.operation_area.classList.add('operation_area')
@@ -42,6 +52,8 @@ export class Timer{
         this.button_log.style.whiteSpace = "pre-wrap"
         this.button_log.id = 'button-log'
 
+        this.csv_area = document.createElement('div')
+        this.csv_area.classList.add('csv-area')
 
         this.timer_click = 0
     }
@@ -58,7 +70,10 @@ export class Timer{
     render(){
         const container = document.querySelector('.main-area');
         let count = 0;
-
+        const damyElement = document.createElement('div')
+        damyElement.textContent = '統計エリア'
+        this.csv_area.textContent = 'CSVエリア'
+        const Statistical = new StatisticalArea(damyElement);
         let isTracking: boolean = false;
 
         this.start_timer.addEventListener("click", () => {
@@ -97,9 +112,12 @@ export class Timer{
         this.log_area.append(this.button_log)
 
         this.operation_area.append(this.start_timer)
-        this.operation_area?.append(this.end_timer)
-        this.low_area.append(this.operation_area)
-        this.low_area.append(this.log_area)
+        this.operation_area.append(this.end_timer)
+        this.log_area.append(Statistical.data)
+        this.left_area.append(this.operation_area, this.log_area)
+        this.low_area.append(this.left_area)
+        this.right_area.append(this.csv_area)
+        this.low_area.append(this.right_area)
         container?.append(this.low_area)
     }
 }

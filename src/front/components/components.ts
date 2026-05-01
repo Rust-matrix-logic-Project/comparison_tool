@@ -106,3 +106,10 @@ export class MainArea{
         container?.append(this.actions);
     }
 }
+
+export class StatisticalArea{
+    data: HTMLElement
+    constructor(data: HTMLElement){
+        this.data = data
+    }
+}
